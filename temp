@@ -1,0 +1,64 @@
+    ldi r16, 0x48; 01001000
+    push r16
+
+    ldi r16, 0x65
+    push r16
+
+    ldi r16, 0x6C
+    push r16
+
+    push r16
+
+    ldi r16, 0x6F
+    push r16
+
+    ldi r16, 0x20
+    push r16
+
+    ldi r16, 0x57
+    push r16
+    
+    ldi r16, 0x6f
+    push r16
+
+    ldi r16, 0x72
+    push r16
+
+    ldi r16, 0x6C
+    push r16
+    
+    ldi r16, 0x64
+    push r16
+
+    ldi r16, 11
+    push r16
+
+    call print_word_from_stack
+
+print_word_from_stack:
+    pop r31
+    pop r30
+
+    pop r16
+    ldi r17, 0xFF
+
+    sbi _PORTB, _pinRS; set to word mode
+
+
+    print_loop:
+        pop r18
+        out _PORTD, r18
+        rcall send_instruction
+
+        ADD r16, r17; r16--
+
+        brne print_loop
+
+
+    cbi _PORTB, _pinRS
+    push r30
+    push r31 
+
+    ret
+
+        

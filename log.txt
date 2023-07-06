@@ -1,0 +1,78 @@
+7-5-23
+    START:
+        write an 8 bit version of wordle for the ATmega328p
+
+    I'll need to write:
+        A pseudo-random number generator
+        output buffer?
+
+    What memory can I address?
+        Flash Program memory
+            0x0000:0x3FFF
+        
+        SRAM Data memory
+            0x0000:0x001F 32 Registers
+                R0:R15 Internal
+                R16:R25 I/O
+                R26:R31 I/O + "16-bit addr pointers"? 
+            
+            0x0020:0x005F 64 I/O Registers
+            0x0060:0x00FF 160 Ext I/O Registers
+            0x0100:0x08FF Internal SRAM (Stack?), 1048x8
+
+        EEPROM Data memory
+            1Kb
+            ~ More info in datasheet, page 19,22
+
+
+    How input/output?
+        cursor with arrows
+
+    How output?
+
+    Game loop
+        6 guesses
+            enter a word
+        
+            feedback on second row
+                x if not at all, o if incorrect location
+                remove letters marked with an x
+
+            be able to view previous guesses 
+
+        if a guess is right, display correct
+
+https://www.openhacks.com/uploadsproductos/eone-1602a1.pdf ~ saved as 1602A_datasheet.pdf
+https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
+
+
+
+for the wait_BF method, do I have to set and clear the E pin every check, or can it be held?
+    have to set E every check
+
+Adafruit Metro clock speed:
+    16 * 2^20 = 2^24
+
+
+SI units
+M (mega) - 10^6, 2^20
+k (kilo) - 10^3, 2^10
+
+m (milli) - 10^-3, 2^-10
+u (micro) - 10^-6, 2^-20
+n (nano)  - 10^-9, 2^-30
+
+7/5/23 summary
+    this is a better implementation of all of this compared to last time
+    
+
+
+
+
+
+
+
+
+
+
+
