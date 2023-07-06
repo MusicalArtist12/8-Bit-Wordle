@@ -1,3 +1,7 @@
+; Julia Abdel-Monem
+; July 5, 2023
+; written for an Adafruit metro with a atmega328P running at 16Mhz
+
 .DEVICE atmega328P
 #include "display.asm"
 #include "delay.asm"
@@ -12,6 +16,9 @@ main:
     rcall display_on
     rcall clear_display
     rcall return_home
+
+    ldi r16, 0x00
+    push r16
 
     ldi r16, 0x64; char = d
     push r16
@@ -44,9 +51,6 @@ main:
     push r16
 
     ldi r16, 0x48; char = H
-    push r16
-
-    ldi r16, 11
     push r16
 
 

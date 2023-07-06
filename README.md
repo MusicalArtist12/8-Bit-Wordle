@@ -1,0 +1,1 @@
+So yeah, the goal is to write the game wordle to run natively

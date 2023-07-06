@@ -1,6 +1,7 @@
-;.DEVICE atmega328P
+; Julia Abdel-Monem
+; July 5, 2023
+; written for an Adafruit metro with a atmega328P running at 16Mhz, connected as stated below to a 1602A LCD screen
 
-; TL,DR: PORTB has the control pins, PORTD has the data pins
 
 ;    VSS - gnd
 ;    VDD - +5.0V
@@ -167,21 +168,22 @@ print_word_from_stack:  ;-------------------------------------------------------
     pop r31
     pop r30
 
-    pop r19
-    ldi r20, 0xFF
 
     sbi _PORTB, _pinRS; set to word mode
 
 
     print_loop:
         pop r16
+        cpi r16, 0x00
+
+        breq print_loop_end
+
         out _PORTD, r16
         rcall send_instruction
 
-        ADD r19, r20; r19--
+        rjmp print_loop
 
-        brbc 1, print_loop
-
+    print_loop_end:
 
     cbi _PORTB, _pinRS
     push r30

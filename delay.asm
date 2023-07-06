@@ -1,3 +1,7 @@
+; Julia Abdel-Monem
+; July 5, 2023
+; written for an Adafruit metro with a atmega328P running at 16Mhz
+
 .equ _TCCR0A = 0x44 ; timer/counter control register A
 .equ _TCCR0B = 0x45 ; timer/counter control register B 
 .equ _TCNT0 = 0x46 ; timer/counter register
