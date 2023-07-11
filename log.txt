@@ -64,15 +64,35 @@ n (nano)  - 10^-9, 2^-30
 
 7/5/23 summary
     this is a better implementation of all of this compared to last time
+
+
+7/8/23 
+    its a good day to figure out pseudo random number generaton. i'm going to code something in c++ to understand things. then i'll implement it
+
+    It does not need to be a GOOD prng, it just has to be A prng
+
+    ok, i'm going to use a linear-feedback shift register. 
+    it might use xorshift as a base.
+
+    ok, i've got a working randomizer working. 
+
+    it can give 32 unique random numbers per seed. and the seed can be 0 < n <= 255. if the same seed is used twice, then it'll be the same numbers, twice.
+    those numbers are between 0 and 255. 
+
+
+    i'm going to call that good for now. 
+
+    about the seed:
+        create a timer on the second timer interrupt that counts ms from startup, 
+        then use that time as a seed.
+        
+        get a new seed every 12 guesses or so. 
+
+        it still is sequential, which is kinda a problem...
+            this would be solved by a nonlinear
+            
+        if i did % 128 on the dataset, then each number could in theory be followed by 2 different numbers
+                 % 64 would have 4 different possibilities following it. 
+                 % 32 would have 8 
+
     
-
-
-
-
-
-
-
-
-
-
-

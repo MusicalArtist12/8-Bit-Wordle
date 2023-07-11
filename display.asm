@@ -52,7 +52,7 @@ send_instruction:       ;-------------------------------------------------------
     cbi _PORTB, _pinRW
     sbi _PORTB, _pinE 
 
-    ;wait 1200 ns/ 1.20 us 
+    ; wait 1200 ns/ 1.20 us 
 
     eor r16, r16
     ldi r18, 1
