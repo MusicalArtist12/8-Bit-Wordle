@@ -1,0 +1,22 @@
+; pin 19/A5/SCL = PORTC[5]
+; pin 18/A4/SDA = PORTC[4]
+; pin 17/A3 = PORTC[3]
+; pin 16/A2 = PORTC[2]
+; pin 15/A1 = PORTC[1]
+; pin 14/A0 = PORTC[0]
+
+; pin 13 = PORTB[5] also light L
+; pin 12 = PORTB[4]
+; pin 11 = PORTB[3]
+; pin 10 = PORTB[2]
+; pin 9 = PORTB[1]
+; pin 8 = PORTB[0]
+
+; pin 7 = PORTD[7]
+; pin 6 = PORTD[6]
+; pin 5 = PORTD[5] 0x20
+; pin 4 = PORTD[4] 0x10
+; pin 3 = PORTD[3] 0x08
+; pin 2 = PORTD[2] 0x04
+; pin 1 = PORTD[1] also rx light, falling edge
+; pin 0 = PORTD[0] 0x01

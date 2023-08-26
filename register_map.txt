@@ -1,0 +1,42 @@
+internal logic (not used to pass values between functions)
+    r0 - loop counter (i)
+    r1 - loop (i+r1)
+    r2 
+    r3
+
+    r16 
+    r17 
+    r18 
+    r19
+
+function input
+    r4 
+    r5 
+    r6
+    r7 
+
+    r20
+    r21 
+    r22 
+    r23
+
+
+function output
+    r8 
+    r9 
+    r10 
+    r11 
+
+    r24
+    r25 
+    r26 
+    r27 
+
+stack:
+    r30 \
+    r31 - "print_word_from_stack", used to store return address
+
+
+PORTB - Screen and button
+PORTC - button
+PORTD - screen

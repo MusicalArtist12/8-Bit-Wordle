@@ -96,3 +96,36 @@ n (nano)  - 10^-9, 2^-30
                  % 32 would have 8 
 
     
+
+
+http://www.avr-asm-tutorial.net/avr_en/beginner/addressing/addressing_eeprom.html
+
+
+rjmp:   ( PC - 2K (word) + 1 ) < k < ( PC + 2K (word) )
+
+        ( PC - 4Kib + 1 ) < k < ( PC + 4Kib )
+        ( PC - 0x1000 + 0x0001 ) < k < ( PC + 0x1000)
+
+Flash Program memory
+    0x0000:0x3FFF
+
+main    0x0100
+display 0x0200
+delay   0x0300
+input   0x0400
+
+
+
+7-15
+    got a new board for this project
+    soldered on "male" headers. 
+        0, 1, 2, 5, 8, 9, 10 do not have valid connections
+
+8-26
+    its been a month. i haven't really worked on it all that much.
+
+    however, I just solved a few big problems. 
+    
+    first, I figured out the register layout that I want to use. 
+
+    second, I figured out how to hexidecimal values to the display. this will be critical in debugging later.

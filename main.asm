@@ -5,6 +5,8 @@
 .DEVICE atmega328P
 #include "display.asm"
 #include "delay.asm"
+#include "input.asm"
+#include "Registers.asm"
 
 rjmp main
 
@@ -13,6 +15,8 @@ main:
     rcall init_display
     
     rcall display_set
+
+    ldi r20, 0x03
     rcall display_on
     rcall clear_display
     rcall return_home
@@ -56,7 +60,75 @@ main:
 
     call print_word_from_stack
 
+    ldi r20, 0xFF
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+    call _61us
+
+    rcall clear_display
+    rcall return_home
+
+    eor r1, r1
+    eor r0, r0
+    ldi r16, 0x01
+    eor r1, r16
+
+    ldi r20, 0x00
+    rcall display_on
+
+    loop:
+        ldi r20, 0xFF
+        call _61us
+        call _61us
+        call _61us
+        call _61us
+        call _61us
+        call _61us
+        call _61us
+        call _61us
+
+        rcall clear_display
+        rcall return_home
+
+        eor r20, r20
+        eor r20, r0
+        call print_hex_value
+
+        add r0, r1
+        brbc 0, loop
+
 
 sink:
     sbi _PORTB, 5 
     rjmp sink
+
+
