@@ -57,8 +57,8 @@ main:
     ldi r16, 0x48; char = H
     push r16
 
-
     call print_word_from_stack
+
 
     ldi r20, 0xFF
     call _61us
@@ -94,8 +94,9 @@ main:
     call _61us
     call _61us
 
-    rcall clear_display
-    rcall return_home
+
+    ldi r20, _line1
+    call set_DDRAM_ADDR
 
     eor r1, r1
     eor r0, r0
@@ -116,8 +117,8 @@ main:
         call _61us
         call _61us
 
-        rcall clear_display
-        rcall return_home
+        ldi r20, _line1
+        call set_DDRAM_ADDR
 
         ldi r16, 0x00
         push r16

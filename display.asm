@@ -16,6 +16,12 @@
 
 #include "Registers.asm"
 
+#define _line0 0x00 
+#define _line0_end 0x27
+
+#define _line1 0x40 
+#define _line1_end 0x67
+
 ; PORT B 
     #define _pinRS 0x00
     #define _pinRW 0x01
@@ -112,6 +118,10 @@ clear_display:          ;-------------------------------------------------------
 
     ret
 
+; r20 - the line to clear
+clear_line:
+
+
 return_home:            ;-------------------------------------------------------------------
     rcall wait_BF
 
@@ -142,10 +152,51 @@ display_off:            ;-------------------------------------------------------
 
     ret
 
+
+; r20 - bit 0 = l/r
+cursor_shift:           ;-------------------------------------------------------------------
+    rcall wait_BF   
+
+    lsl r20
+    lsl r20
+    ori r20, 0x10 ; 0001 0n00
+
+    rcall send_instruction 
+    ret
+    
+; r20 - bit 0 = l/r
+display_shift:          ;-------------------------------------------------------------------
+    rcall wait_BF
+
+    lsl r20
+    lsl r20
+    ori r20, 0x18 ; 0001 1n00
+
+    rcall send_instruction 
+    ret
+
 display_set:            ;-------------------------------------------------------------------
     rcall wait_BF
 
     ldi r20, 0x3C ; 0011 1100 ~ 8 bit mode, 2 lines, 5x8 font size 
+    rcall send_instruction    
+
+    ret
+
+; r20 = ddram addr
+set_DDRAM_ADDR:            ;-------------------------------------------------------------------
+    rcall wait_BF
+
+    ori r20, 0x80
+    rcall send_instruction    
+
+    ret
+
+; r20 = ddram addr
+set_CGRAM_ADDR:            ;-------------------------------------------------------------------
+    rcall wait_BF
+
+    ori r20, 0x40
     rcall send_instruction    
 
     ret
@@ -178,7 +229,7 @@ print_word_from_stack:  ;-------------------------------------------------------
     ret
 
 ; r20 - input
-push_hex_value:
+push_hex_value:         ;-------------------------------------------------------------------
 
     eor r16, r16
     eor r16, r20
@@ -199,7 +250,6 @@ push_hex_value:
     eor r16, r16
     eor r16, r20
 
-
     eor r20, r20
     eor r20, r17
     rcall get_nibble_hex
@@ -218,7 +268,7 @@ push_hex_value:
     ret
 
 ; r20 - nibble (returns on r20)
-get_nibble_hex:
+get_nibble_hex:       
 
     push r16
     push r17
@@ -245,7 +295,7 @@ get_nibble_hex:
 
 
 ; r20 - input
-push_binary_value:
+push_binary_value:      ;-------------------------------------------------------------------
     pop r31
     pop r30
 

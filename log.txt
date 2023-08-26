@@ -125,7 +125,30 @@ input   0x0400
     its been a month. i haven't really worked on it all that much.
 
     however, I just solved a few big problems. 
-    
     first, I figured out the register layout that I want to use. 
-
     second, I figured out how to hexidecimal values to the display. this will be critical in debugging later.
+
+    DDRAM = Cursor i think, or at least thats how its working rn.
+
+    CGRAM must be the character ram directly. that might be fun
+
+    I also sorted out line selection and "string concatenation"
+        (i'm just being specific about where i put null pointers in the stack)
+
+    __________________
+    |Hello World     |
+    |FF 11111111     |
+    ------------------
+
+    is what is now displayed. lots more work to do but this pretty much marks
+    the end of the display driver development.
+
+    todo:
+        - input driver and test
+            - (take input and output it on display)
+            - tbh i should also develop a routine to print a single character.
+            
+        - pseudo random number generation (implementation)
+
+        - store words in memory and look up one at random
+        - input checking/storing.
