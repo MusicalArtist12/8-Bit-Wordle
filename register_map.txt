@@ -1,8 +1,8 @@
 internal logic (not used to pass values between functions)
     r0 - loop counter (i)
     r1 - loop (i+r1)
-    r2 
-    r3
+    r2 - loop counter (j)
+    r3 - loop (j+r2)
 
     r16 
     r17 

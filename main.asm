@@ -100,7 +100,7 @@ main:
     eor r1, r1
     eor r0, r0
     ldi r16, 0x01
-    eor r1, r16
+    eor r0, r16
 
     ldi r20, 0x00
     rcall display_on
@@ -119,11 +119,23 @@ main:
         rcall clear_display
         rcall return_home
 
-        eor r20, r20
-        eor r20, r0
-        call print_hex_value
+        ldi r16, 0x00
+        push r16
 
-        add r0, r1
+        eor r20, r20
+        eor r20, r1
+        call push_binary_value
+
+        ldi r16, 0x20
+        push r16
+
+        eor r20, r20
+        eor r20, r1
+        call push_hex_value
+
+        call print_word_from_stack
+
+        add r1, r0
         brbc 0, loop
 
 
