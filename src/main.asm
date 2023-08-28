@@ -3,23 +3,22 @@
 ; written for an Adafruit metro with a atmega328P running at 16Mhz
 
 .DEVICE atmega328P
-#include "display.asm"
-#include "delay.asm"
-#include "input.asm"
-#include "Registers.asm"
+.include "delay_interrupt.asm"
+.include "registers.asm"
 
+.org 0x000
 rjmp main
 
 .org 0x100
 main:
-    rcall init_display
+    call init_display
     
-    rcall display_set
+    call display_set
 
     ldi r20, 0x03
-    rcall display_on
-    rcall clear_display
-    rcall return_home
+    call display_on
+    call clear_display
+    call return_home
 
     ldi r16, 0x00
     push r16
@@ -104,7 +103,7 @@ main:
     eor r0, r16
 
     ldi r20, 0x00
-    rcall display_on
+    call display_on
 
     loop:
         ldi r20, 0xFF
@@ -118,7 +117,7 @@ main:
         call _61us
 
         ldi r20, _line1
-        call set_DDRAM_ADDR
+        rcall set_DDRAM_ADDR
 
         ldi r16, 0x00
         push r16
@@ -139,9 +138,11 @@ main:
         add r1, r0
         brbc 0, loop
 
-
 sink:
     sbi _PORTB, 5 
     rjmp sink
 
+.include "display.asm"
+.include "stream.asm"
+.include "delay.asm"
 

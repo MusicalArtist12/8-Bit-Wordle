@@ -1,19 +1,13 @@
+.ifndef DELAY_ASM
+.define DELAY_ASM
+
+.ifndef DELAY_INTERRUPT_ASM
+    .error "delay interrupt not properly configured"
+.endif
+
 ; Julia Abdel-Monem
 ; July 5, 2023
 ; written for an Adafruit metro with a atmega328P running at 16Mhz
-
-
-#ifndef DELAY_ASM
-#define DELAY_ASM
-
-#include "Registers.asm"
-
-
-.org 0x001C ; OCR0A
-clz ; clear zero flag
-reti
-
-.org 0x300
 
 ; r20 = multiplier
 _500ns: 
@@ -21,7 +15,6 @@ _500ns:
     sts _TCCR0A, r16
 
     ldi r16, 0x032  ; set to clk/8, which results in a relative clk rate of 2^21 hz 
-                    ; roughly 500 ns per cycle
     sts _TCCR0B, r16 
 
     ldi r16, 0x02   ; sets timer/counter output compare match A interrupt to true.
@@ -49,7 +42,6 @@ _3814ns:
     sts _TCCR0A, r16
 
     ldi r16, 0x033  ; set to clk/64, which results in a relative clk rate of 2^21 hz 
-                    ; roughly 500 ns per cycle
     sts _TCCR0B, r16 
 
     ldi r16, 0x02   ; sets timer/counter output compare match A interrupt to true.
@@ -77,7 +69,6 @@ _15us:
     sts _TCCR0A, r16
 
     ldi r16, 0x034  ; set to clk/256, which results in a relative clk rate of 2^16 hz 
-                    ; roughly 500 ns per cycle
     sts _TCCR0B, r16 
 
     ldi r16, 0x02   ; sets timer/counter output compare match A interrupt to true.
@@ -105,7 +96,6 @@ _61us:
     sts _TCCR0A, r16
 
     ldi r16, 0x035  ; set to clk/1024, which results in a relative clk rate of 2^14 hz 
-                    ; roughly 500 ns per cycle
     sts _TCCR0B, r16 
 
     ldi r16, 0x02   ; sets timer/counter output compare match A interrupt to true.
@@ -127,4 +117,4 @@ _61us:
 
     ret
 
-#endif
+.endif
