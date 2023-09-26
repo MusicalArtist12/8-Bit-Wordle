@@ -161,3 +161,23 @@ input   0x0400
     rcall for within the segment
 
     call for between files
+
+9-18-23
+    I just figured something out.
+
+    the way i've been currently using the stack is one initial point.
+
+    but we have eeprom memory.
+
+    So i can store stack pointers to the eeprom memory. 
+    (i can also store stack pointers to register space.)
+
+    but this will allow me to allocate parts of the stack for different things.
+
+    so what i want to do is use 32 bytes for screen buffer memory, 
+    and use the rest for return addresses.
+
+    i think this is how C uses stack/heap memory. 
+    
+
+    I want to add \r and \n. 
